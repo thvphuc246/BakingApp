@@ -1,13 +1,18 @@
 package com.example.vinhphuc.bakingapp;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.app.Application;
 
-public class MainActivity extends AppCompatActivity {
+import timber.log.Timber;
+
+public class BakingApp extends Application {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void onCreate() {
+        super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Timber.uprootAll();
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 }

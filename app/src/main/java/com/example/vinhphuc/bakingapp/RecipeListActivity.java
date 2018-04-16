@@ -1,4 +1,6 @@
 package com.example.vinhphuc.bakingapp;
 
-public class RecipeListActivity {
+import com.example.vinhphuc.bakingapp.base.BaseActivity;
+
+public class RecipeListActivity extends BaseActivity {
 }
