@@ -42,6 +42,13 @@ dependencies {
     //ButterKnife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    //Retrofit & RxJava
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.0-RC1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.3.0'
     //Guava
     implementation 'com.google.guava:guava:22.0'
     implementation 'blue.aodev:material-values:1.1.1'
