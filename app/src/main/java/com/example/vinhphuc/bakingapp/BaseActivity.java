@@ -1,4 +1,4 @@
-package com.example.vinhphuc.bakingapp.base;
+package com.example.vinhphuc.bakingapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.example.vinhphuc.bakingapp.R;
+import com.example.vinhphuc.bakingapp.data.MvpView;
 import com.example.vinhphuc.bakingapp.utils.CommonUtils;
 import com.example.vinhphuc.bakingapp.utils.NetworkUtils;
 
