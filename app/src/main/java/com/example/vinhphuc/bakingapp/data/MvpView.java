@@ -1,4 +1,4 @@
-package com.example.vinhphuc.bakingapp.base;
+package com.example.vinhphuc.bakingapp.data;
 
 import android.support.annotation.StringRes;
 
