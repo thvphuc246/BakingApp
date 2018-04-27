@@ -3,7 +3,7 @@ package com.example.vinhphuc.bakingapp.data.contract;
 import com.example.vinhphuc.bakingapp.data.MvpView;
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
 import com.example.vinhphuc.bakingapp.data.presenter.MvpPresenter;
-import com.example.vinhphuc.bakingapp.idlingresource.RecipesIdlingResource;
+import com.example.vinhphuc.bakingapp.data.handling.RecipesIdlingResource;
 
 import java.util.List;
 
