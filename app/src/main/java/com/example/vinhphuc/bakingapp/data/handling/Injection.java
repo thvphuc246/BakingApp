@@ -1,4 +1,5 @@
 package com.example.vinhphuc.bakingapp.data.handling;
 
-class Injection {
+public class Injection {
+    sdsa
 }
