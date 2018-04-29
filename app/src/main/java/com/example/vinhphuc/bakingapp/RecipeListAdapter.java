@@ -1,4 +1,4 @@
-package com.example.vinhphuc.bakingapp.adapter;
+package com.example.vinhphuc.bakingapp;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.vinhphuc.bakingapp.R;
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
 
 import java.util.ArrayList;
