@@ -1,11 +1,13 @@
-package com.example.vinhphuc.bakingapp.data.fragment;
+package com.example.vinhphuc.bakingapp.presentation.base;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -17,17 +19,21 @@ import com.example.vinhphuc.bakingapp.utils.NetworkUtils;
 
 import butterknife.Unbinder;
 
-public class BaseFragment extends Fragment implements MvpView {
+public abstract class BaseActivity extends AppCompatActivity implements MvpView {
     private Unbinder mUnbinder;
     private ProgressDialog mProgressDialog;
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void hideKeyboard() {
-        View view = getActivity().getCurrentFocus();
+        View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm =
-                    (InputMethodManager) getActivity()
-                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
@@ -35,13 +41,13 @@ public class BaseFragment extends Fragment implements MvpView {
     @Override
     public void showLoading() {
         hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(this.getActivity());
+        this.mProgressDialog = CommonUtils.showLoadingDialog(this);
     }
 
     @Override
     public void hideLoading() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
+        if (this.mProgressDialog != null && this.mProgressDialog.isShowing()) {
+            this.mProgressDialog.cancel();
         }
     }
 
@@ -55,12 +61,13 @@ public class BaseFragment extends Fragment implements MvpView {
     }
 
     private void showSnackBar(String message) {
-        Snackbar snackbar = Snackbar.make(getActivity()
-                .findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(
+                findViewById(android.R.id.content),
+                message,
+                Snackbar.LENGTH_SHORT);
         View sbView = snackbar.getView();
-        TextView textView =
-                (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(ContextCompat.getColor(this.getActivity(), android.R.color.white));
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         snackbar.show();
     }
 
@@ -70,24 +77,19 @@ public class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
-    public void showSnackBarMessage(String message) {
-        showSnackBar(message);
-    }
-
-    @Override
     public boolean isNetworkConnected() {
-        return NetworkUtils.isNetworkConnected(getActivity());
+        return NetworkUtils.isNetworkConnected(getApplicationContext());
     }
 
     protected void setUnbinder(Unbinder unbinder) {
-        mUnbinder = unbinder;
+        this.mUnbinder = unbinder;
     }
 
     @Override
-    public void onDestroyView() {
-        if (mUnbinder != null) {
-            mUnbinder.unbind();
+    protected void onDestroy() {
+        if (this.mUnbinder != null) {
+            this.mUnbinder.unbind();
         }
-        super.onDestroyView();
+        super.onDestroy();
     }
 }

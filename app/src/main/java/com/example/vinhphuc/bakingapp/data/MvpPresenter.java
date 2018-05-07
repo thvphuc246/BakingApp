@@ -1,4 +1,4 @@
-package com.example.vinhphuc.bakingapp.data.presenter;
+package com.example.vinhphuc.bakingapp.data;
 
 import com.example.vinhphuc.bakingapp.data.MvpView;
 

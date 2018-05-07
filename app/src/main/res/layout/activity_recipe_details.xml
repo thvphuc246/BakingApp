@@ -5,4 +5,4 @@
     android:id="@+id/content_frame_recipe_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecipeDetailsActivity" />
+    tools:context=".presentation.recipe_details.RecipeDetailsActivity" />

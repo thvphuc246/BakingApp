@@ -1,8 +1,8 @@
-package com.example.vinhphuc.bakingapp.data.contract;
+package com.example.vinhphuc.bakingapp.presentation.recipe_list;
 
 import com.example.vinhphuc.bakingapp.data.MvpView;
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
-import com.example.vinhphuc.bakingapp.data.presenter.MvpPresenter;
+import com.example.vinhphuc.bakingapp.data.MvpPresenter;
 import com.example.vinhphuc.bakingapp.data.handling.RecipesIdlingResource;
 
 import java.util.List;

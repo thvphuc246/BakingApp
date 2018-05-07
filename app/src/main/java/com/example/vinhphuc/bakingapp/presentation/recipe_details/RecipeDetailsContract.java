@@ -1,9 +1,9 @@
-package com.example.vinhphuc.bakingapp.data.contract;
+package com.example.vinhphuc.bakingapp.presentation.recipe_details;
 
 import com.example.vinhphuc.bakingapp.data.MvpView;
 import com.example.vinhphuc.bakingapp.data.model.Ingredient;
 import com.example.vinhphuc.bakingapp.data.model.Step;
-import com.example.vinhphuc.bakingapp.data.presenter.MvpPresenter;
+import com.example.vinhphuc.bakingapp.data.MvpPresenter;
 
 import java.util.List;
 

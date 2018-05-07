@@ -1,4 +1,4 @@
-package com.example.vinhphuc.bakingapp.data.adapter;
+package com.example.vinhphuc.bakingapp.presentation.recipe_details;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

@@ -1,6 +1,7 @@
-package com.example.vinhphuc.bakingapp.data.presenter;
+package com.example.vinhphuc.bakingapp.presentation.base;
 
 import com.example.vinhphuc.bakingapp.data.MvpView;
+import com.example.vinhphuc.bakingapp.data.MvpPresenter;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;

@@ -1,13 +1,11 @@
-package com.example.vinhphuc.bakingapp;
+package com.example.vinhphuc.bakingapp.presentation.base;
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -19,21 +17,17 @@ import com.example.vinhphuc.bakingapp.utils.NetworkUtils;
 
 import butterknife.Unbinder;
 
-public abstract class BaseActivity extends AppCompatActivity implements MvpView {
+public class BaseFragment extends Fragment implements MvpView {
     private Unbinder mUnbinder;
     private ProgressDialog mProgressDialog;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void hideKeyboard() {
-        View view = this.getCurrentFocus();
+        View view = getActivity().getCurrentFocus();
         if (view != null) {
             InputMethodManager imm =
-                    (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    (InputMethodManager) getActivity()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
@@ -41,13 +35,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     @Override
     public void showLoading() {
         hideLoading();
-        this.mProgressDialog = CommonUtils.showLoadingDialog(this);
+        mProgressDialog = CommonUtils.showLoadingDialog(this.getActivity());
     }
 
     @Override
     public void hideLoading() {
-        if (this.mProgressDialog != null && this.mProgressDialog.isShowing()) {
-            this.mProgressDialog.cancel();
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
         }
     }
 
@@ -61,13 +55,12 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     }
 
     private void showSnackBar(String message) {
-        Snackbar snackbar = Snackbar.make(
-                findViewById(android.R.id.content),
-                message,
-                Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(getActivity()
+                .findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
         View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        TextView textView =
+                (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(ContextCompat.getColor(this.getActivity(), android.R.color.white));
         snackbar.show();
     }
 
@@ -77,19 +70,24 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     }
 
     @Override
-    public boolean isNetworkConnected() {
-        return NetworkUtils.isNetworkConnected(getApplicationContext());
-    }
-
-    protected void setUnbinder(Unbinder unbinder) {
-        this.mUnbinder = unbinder;
+    public void showSnackBarMessage(String message) {
+        showSnackBar(message);
     }
 
     @Override
-    protected void onDestroy() {
-        if (this.mUnbinder != null) {
-            this.mUnbinder.unbind();
+    public boolean isNetworkConnected() {
+        return NetworkUtils.isNetworkConnected(getActivity());
+    }
+
+    protected void setUnbinder(Unbinder unbinder) {
+        mUnbinder = unbinder;
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
         }
-        super.onDestroy();
+        super.onDestroyView();
     }
 }

@@ -1,7 +1,8 @@
-package com.example.vinhphuc.bakingapp.data.presenter;
+package com.example.vinhphuc.bakingapp.presentation.recipe_details;
 
-import com.example.vinhphuc.bakingapp.data.contract.RecipeDetailsContract;
+import com.example.vinhphuc.bakingapp.presentation.recipe_details.RecipeDetailsContract;
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
+import com.example.vinhphuc.bakingapp.presentation.base.BasePresenter;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

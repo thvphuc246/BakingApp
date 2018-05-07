@@ -1,7 +1,7 @@
-package com.example.vinhphuc.bakingapp.data.presenter;
+package com.example.vinhphuc.bakingapp.presentation.recipe_list;
 
 import com.example.vinhphuc.bakingapp.data.RecipeRepo;
-import com.example.vinhphuc.bakingapp.data.contract.RecipeListContract;
+import com.example.vinhphuc.bakingapp.presentation.base.BasePresenter;
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
 import com.example.vinhphuc.bakingapp.data.scheduler.BaseSchedulerProvider;
 import com.example.vinhphuc.bakingapp.data.handling.RecipesIdlingResource;

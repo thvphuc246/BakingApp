@@ -8,7 +8,7 @@
     android:scrollbars="vertical"
     android:dividerPadding="@dimen/divider_padding"
     android:orientation="vertical"
-    tools:context=".RecipeListActivity">
+    tools:context=".presentation.recipe_list.RecipeListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipe_list"
