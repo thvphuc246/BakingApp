@@ -4,8 +4,9 @@
     <dimen name="cardview_text">24dp</dimen>
     <dimen name="cardview_elevation">8dp</dimen>
     <dimen name="divider_padding">2dp</dimen>
-    <dimen name="cardview_margin">4dp</dimen>
+    <dimen name="cardview_margin">8dp</dimen>
     <dimen name="list_item_margin">4dp</dimen>
+    <dimen name="exoplayer_margin">8dp</dimen>
 
     <!-- Misc -->
     <dimen name="cards_gutter_half">4dp</dimen>
