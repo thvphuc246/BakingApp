@@ -13,7 +13,7 @@ public interface RecipeDetailsContract {
         void showIngredients(List<Ingredient> ingredients);
         void showRecipeNameInAppBar(String recipeName);
         void showStepDetails(int stepId);
-        void showStepsDetailContainer(int stepId);
+        void showStepsDetailInContainer(int stepId);
         void setPresenter(Presenter presenter);
     }
 
