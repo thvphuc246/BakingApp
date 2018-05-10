@@ -1,4 +1,4 @@
-package com.example.vinhphuc.bakingapp.data.handling;
+package com.example.vinhphuc.bakingapp.data;
 
 import com.example.vinhphuc.bakingapp.data.RecipeRepo;
 import com.example.vinhphuc.bakingapp.data.model.ApiService;
