@@ -1,6 +1,6 @@
 package com.example.vinhphuc.bakingapp.presentation.recipe_list;
 
-import com.example.vinhphuc.bakingapp.data.RecipeRepo;
+import com.example.vinhphuc.bakingapp.data.handling.RecipeRepo;
 import com.example.vinhphuc.bakingapp.presentation.base.BasePresenter;
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
 import com.example.vinhphuc.bakingapp.data.scheduler.BaseSchedulerProvider;

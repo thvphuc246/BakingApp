@@ -1,4 +1,4 @@
-package com.example.vinhphuc.bakingapp.data;
+package com.example.vinhphuc.bakingapp.data.handling;
 
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
 
