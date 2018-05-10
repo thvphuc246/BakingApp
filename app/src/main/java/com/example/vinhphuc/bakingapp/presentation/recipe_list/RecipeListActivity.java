@@ -74,6 +74,7 @@ public class RecipeListActivity
                 Injection.provideRecipeRepo(),
                 Injection.provideSchedulerProvider()
         );
+        mPresenter.attachView(this);
 
         mRecipeListAdapter = new RecipeListAdapter(new ArrayList<Recipe>(0),
                 new RecipeListAdapter.OnItemClickListener() {
