@@ -40,7 +40,7 @@ public class RecipeDetailsPresenter
 
     @Override
     public void loadStepData(int stepId) {
-        getView().showStepsDetailContainer(stepId);
+        getView().showStepsDetailInContainer(stepId);
     }
 
     @Override
