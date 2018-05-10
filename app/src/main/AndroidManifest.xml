@@ -31,7 +31,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.recipe_list.RecipeListActivity" />
         </activity>
-        <activity android:name=".RecipeStepActivity" />
+        <activity android:name=".presentation.recipe_step.RecipeStepActivity" />
 
         <receiver android:name=".widget.IngredientsWidgetProvider">
             <intent-filter>
