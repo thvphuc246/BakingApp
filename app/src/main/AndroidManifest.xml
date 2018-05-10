@@ -48,7 +48,7 @@
 
         <provider
             android:authorities="com.example.vinhphuc.bakingapp"
-            android:name=".data.local.provider.IngredientsProvider"
+            android:name=".data.provider.IngredientsProvider"
             android:exported="true"/>
 
     </application>
