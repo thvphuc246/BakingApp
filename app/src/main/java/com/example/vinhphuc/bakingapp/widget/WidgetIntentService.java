@@ -1,5 +1,6 @@
 package com.example.vinhphuc.bakingapp.widget;
 
+import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.widget.RemoteViewsService;
 
 import com.example.vinhphuc.bakingapp.R;
 import com.example.vinhphuc.bakingapp.data.provider.IngredientContract.Entry;
+import com.example.vinhphuc.bakingapp.presentation.recipe_details.RecipeDetailsActivity;
 
 import timber.log.Timber;
 
@@ -87,6 +89,13 @@ public class WidgetIntentService extends RemoteViewsService {
 
                 remoteViews.setTextViewText(R.id.widget_ingredient_measure, measure);
             }
+
+            /*//Create a pending intent from the recipe detail activity intent
+            Intent intent = new Intent(context, RecipeDetailsActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+
+            //When a button is clicked, open the recipe detail activity
+            remoteViews.setOnClickPendingIntent(R.id.widget_ingredient_name, pendingIntent);*/
 
             // Return the remote views object.
             return remoteViews;

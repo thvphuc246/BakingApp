@@ -99,7 +99,7 @@ public class SingleStepFragment
         int orientation = getResources().getConfiguration().orientation;
         String video = step != null ? step.getVideoURL() : "";
 
-        if (video != null && video.isEmpty()) {
+        if (video != null && !video.isEmpty()) {
             //Init and show video view
             setViewVisibility(exoPlayerView, true);
             initializeMediaSession();

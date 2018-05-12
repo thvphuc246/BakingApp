@@ -1,19 +1,21 @@
 package com.example.vinhphuc.bakingapp.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
 import com.example.vinhphuc.bakingapp.BuildConfig;
 import com.example.vinhphuc.bakingapp.R;
+import com.example.vinhphuc.bakingapp.presentation.recipe_details.RecipeDetailsActivity;
 
 public class IngredientsWidgetProvider extends AppWidgetProvider {
-    static void updateAppWidget(
-            Context context,
-            AppWidgetManager appWidgetManager,
-            int appWidgetId) {
+    static void updateAppWidget(Context context,
+                                AppWidgetManager appWidgetManager,
+                                int appWidgetId) {
         //Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
 
@@ -32,7 +34,9 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
     }
 
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    public void onUpdate(Context context,
+                         AppWidgetManager appWidgetManager,
+                         int[] appWidgetIds) {
         //There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);

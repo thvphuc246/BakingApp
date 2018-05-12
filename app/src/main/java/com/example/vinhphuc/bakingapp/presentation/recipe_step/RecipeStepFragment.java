@@ -130,6 +130,7 @@ public class RecipeStepFragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mPresenter.attachView(this);
+        stepViewPager.setCurrentItem(stepId);
     }
 
     @Override

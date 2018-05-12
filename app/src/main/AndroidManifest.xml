@@ -31,7 +31,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.recipe_list.RecipeListActivity" />
         </activity>
-        <activity android:name=".presentation.recipe_step.RecipeStepActivity" />
+        <activity
+            android:name=".presentation.recipe_step.RecipeStepActivity"
+            android:parentActivityName=".presentation.recipe_details.RecipeDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.recipe_details.RecipeDetailsActivity" />
+        </activity>
 
         <receiver android:name=".widget.IngredientsWidgetProvider">
             <intent-filter>
@@ -43,8 +49,8 @@
                 android:resource="@xml/ingredients_widget_provider_info" />
         </receiver>
 
-        <service android:name=".widget.WidgetIntentService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <!--<service android:name=".widget.WidgetIntentService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>-->
 
         <provider
             android:authorities="com.example.vinhphuc.bakingapp"
