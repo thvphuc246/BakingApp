@@ -18,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.vinhphuc.bakingapp.R;
 import com.example.vinhphuc.bakingapp.data.model.Step;
 import com.example.vinhphuc.bakingapp.presentation.base.BaseFragment;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -62,6 +63,11 @@ public class SingleStepFragment
     private MediaSessionCompat mediaSession;
     private PlaybackStateCompat.Builder stateBuilder;
 
+    private long playerPosition = C.TIME_UNSET;
+    private Uri videoUri;
+    private boolean playWhenReady = true;
+    private int state;
+
     public SingleStepFragment() {}
 
     public static SingleStepFragment newInstance(Step step) {
@@ -78,7 +84,6 @@ public class SingleStepFragment
         super.onViewCreated(view, savedInstanceState);
 
         Step step = getArguments().getParcelable(STEP_KEY);
-
         String description = step != null ? step.getDescription() : "";
         descTextView.setText(description);
 
@@ -98,12 +103,13 @@ public class SingleStepFragment
 
         int orientation = getResources().getConfiguration().orientation;
         String video = step != null ? step.getVideoURL() : "";
+        setUri(Uri.parse(video));
 
         if (video != null && !video.isEmpty()) {
             //Init and show video view
             setViewVisibility(exoPlayerView, true);
             initializeMediaSession();
-            initializePlayer(Uri.parse(video));
+            initializePlayer(videoUri);
 
             if (orientation == Configuration.ORIENTATION_LANDSCAPE && !isTwoPane) {
                 //Expand video, hide description, hide system UI
@@ -173,8 +179,11 @@ public class SingleStepFragment
                     null,
                     null
             );
+
+            if (playerPosition != C.TIME_UNSET)
+                exoPlayer.seekTo(playerPosition);
             exoPlayer.prepare(mediaSource);
-            exoPlayer.setPlayWhenReady(true);
+            exoPlayer.setPlayWhenReady(playWhenReady);
         }
     }
 
@@ -210,8 +219,16 @@ public class SingleStepFragment
         releasePlayer();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (exoPlayer == null)
+            initializePlayer(videoUri);
+    }
+
     private void releasePlayer() {
         if (exoPlayer != null) {
+            playerPosition = exoPlayer.getCurrentPosition();
             exoPlayer.stop();
             exoPlayer.release();
             exoPlayer = null;
@@ -250,4 +267,20 @@ public class SingleStepFragment
     @Override
     public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {}
 
+    @Override
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        if (exoPlayer != null) {
+            playWhenReady = exoPlayer.getPlayWhenReady();
+            state = exoPlayer.getCurrentWindowIndex();
+            playerPosition = Math.max(0, exoPlayer.getCurrentPosition());
+        }
+        bundle.putBoolean("auto_play", playWhenReady);
+        bundle.putInt("state", state);
+        bundle.putLong("position", playerPosition);
+    }
+
+    public void setUri(Uri uri) {
+        this.videoUri = uri;
+    }
 }
