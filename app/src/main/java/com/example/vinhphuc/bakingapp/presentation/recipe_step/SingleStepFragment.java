@@ -214,16 +214,34 @@ public class SingleStepFragment
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT > 23) {
+            initializePlayer(videoUri);
+        }
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
-        releasePlayer();
+        if (Util.SDK_INT <= 23) {
+            releasePlayer();
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (exoPlayer == null)
+        if (Util.SDK_INT <= 23 || exoPlayer == null)
             initializePlayer(videoUri);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Util.SDK_INT > 23) {
+            releasePlayer();
+        }
     }
 
     private void releasePlayer() {
@@ -255,6 +273,8 @@ public class SingleStepFragment
         } else if ((playbackState == ExoPlayer.STATE_READY)) {
             stateBuilder.setState(PlaybackStateCompat.STATE_PAUSED, exoPlayer.getCurrentPosition(), 1f);
         }
+        if (mediaSession == null)
+            initializeMediaSession();
         mediaSession.setPlaybackState(stateBuilder.build());
     }
 
