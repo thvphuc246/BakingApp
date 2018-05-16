@@ -3,6 +3,7 @@ package com.example.vinhphuc.bakingapp.widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,11 +14,19 @@ import com.example.vinhphuc.bakingapp.R;
 import com.example.vinhphuc.bakingapp.presentation.recipe_details.RecipeDetailsActivity;
 
 public class IngredientsWidgetProvider extends AppWidgetProvider {
+
     static void updateAppWidget(Context context,
                                 AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
         //Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
+
+        Intent intent = new Intent(context, RecipeDetailsActivity.class);
+        intent.setAction("LAUNCH_ACTIVITY");
+        PendingIntent pendingIntent =
+                PendingIntent
+                        .getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        context.startActivity(intent);
 
         SharedPreferences sharedPreferences = context
                 .getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
@@ -29,8 +38,18 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
         views.setTextViewText(R.id.widget_recipe_name, recipeName);
         views.setTextViewText(R.id.widget_recipe_ingredients, formattedIngredients);
 
+        //Initiate the click event for the widget to go to the appropriate recipe activity
+        views.setOnClickPendingIntent(R.id.widget_layout, pendingIntent);
+        pushWidgetUpdate(context, views);
+
         //Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+    public static void pushWidgetUpdate(Context context, RemoteViews views) {
+        ComponentName mWidget = new ComponentName(context, IngredientsWidgetProvider.class);
+        AppWidgetManager manager = AppWidgetManager.getInstance(context);
+        manager.updateAppWidget(mWidget, views);
     }
 
     @Override
