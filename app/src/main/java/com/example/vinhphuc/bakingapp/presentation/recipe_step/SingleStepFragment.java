@@ -41,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 import butterknife.BindBool;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class SingleStepFragment
         extends BaseFragment
@@ -75,13 +76,25 @@ public class SingleStepFragment
         bundle.putParcelable(STEP_KEY, step);
         SingleStepFragment fragment = new SingleStepFragment();
         fragment.setArguments(bundle);
-
         return fragment;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle bundle) {
+        super.onActivityCreated(bundle);
+        if (bundle != null) {
+            bundle.getBoolean("auto_play", playWhenReady);
+            bundle.getInt("state", state);
+            bundle.getLong("position", playerPosition);
+            Timber.d("RIP TATSUMI");
+        }
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Timber.d("RIP MINE, " + playWhenReady + ", " + state + ", " + playerPosition);
 
         Step step = getArguments().getParcelable(STEP_KEY);
         String description = step != null ? step.getDescription() : "";
@@ -149,6 +162,7 @@ public class SingleStepFragment
             @Override
             public void onPlay() {
                 exoPlayer.setPlayWhenReady(true);
+                initializePlayer(videoUri);
             }
 
             @Override
@@ -179,12 +193,13 @@ public class SingleStepFragment
                     null,
                     null
             );
-
-            if (playerPosition != C.TIME_UNSET)
-                exoPlayer.seekTo(playerPosition);
             exoPlayer.prepare(mediaSource);
-            exoPlayer.setPlayWhenReady(playWhenReady);
         }
+
+        if (playerPosition != C.TIME_UNSET)
+            exoPlayer.seekTo(playerPosition);
+        exoPlayer.seekToDefaultPosition(state);
+        exoPlayer.setPlayWhenReady(playWhenReady);
     }
 
     private void expandVideoView(@NotNull SimpleExoPlayerView exoPlayerView) {
@@ -246,7 +261,10 @@ public class SingleStepFragment
 
     private void releasePlayer() {
         if (exoPlayer != null) {
-            playerPosition = exoPlayer.getCurrentPosition();
+            playWhenReady = exoPlayer.getPlayWhenReady();
+            state = exoPlayer.getCurrentWindowIndex();
+            playerPosition = Math.max(0, exoPlayer.getCurrentPosition());
+
             exoPlayer.stop();
             exoPlayer.release();
             exoPlayer = null;
@@ -269,9 +287,9 @@ public class SingleStepFragment
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
         if ((playbackState == ExoPlayer.STATE_READY) && playWhenReady) {
-            stateBuilder.setState(PlaybackStateCompat.STATE_PLAYING, exoPlayer.getCurrentPosition(), 1f);
+            stateBuilder.setState(PlaybackStateCompat.STATE_PLAYING, playerPosition, 1f);
         } else if ((playbackState == ExoPlayer.STATE_READY)) {
-            stateBuilder.setState(PlaybackStateCompat.STATE_PAUSED, exoPlayer.getCurrentPosition(), 1f);
+            stateBuilder.setState(PlaybackStateCompat.STATE_PAUSED, playerPosition, 1f);
         }
         if (mediaSession == null)
             initializeMediaSession();
@@ -291,16 +309,31 @@ public class SingleStepFragment
     public void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
         if (exoPlayer != null) {
-            playWhenReady = exoPlayer.getPlayWhenReady();
-            state = exoPlayer.getCurrentWindowIndex();
-            playerPosition = Math.max(0, exoPlayer.getCurrentPosition());
+            setPlayWhenReady(exoPlayer.getPlayWhenReady());
+            setState(exoPlayer.getCurrentWindowIndex());
+            setPlayerPosition(Math.max(0, exoPlayer.getCurrentPosition()));
+            Timber.d("RIP CHELSEA, " + playWhenReady + ", " + state + ", " + playerPosition);
         }
         bundle.putBoolean("auto_play", playWhenReady);
         bundle.putInt("state", state);
         bundle.putLong("position", playerPosition);
+
+        Timber.d("RIP KUROME, " + playWhenReady + ", " + state + ", " + playerPosition);
     }
 
     public void setUri(Uri uri) {
         this.videoUri = uri;
+    }
+
+    public void setPlayWhenReady(boolean playWhenReady) {
+        this.playWhenReady = playWhenReady;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public void setPlayerPosition(long playerPosition) {
+        this.playerPosition = playerPosition;
     }
 }

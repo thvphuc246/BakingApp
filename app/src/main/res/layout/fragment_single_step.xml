@@ -10,6 +10,17 @@
     app:layout_editor_absoluteX="0dp"
     app:layout_editor_absoluteY="81dp">
 
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/recipe_step_video"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/exoplayer_margin"
+        android:layout_marginLeft="@dimen/exoplayer_margin"
+        android:layout_marginRight="@dimen/exoplayer_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <android.support.v7.widget.CardView
         android:id="@+id/recipe_step_desc_card"
         android:layout_width="0dp"
@@ -52,16 +63,5 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
-
-    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-        android:id="@+id/recipe_step_video"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/exoplayer_margin"
-        android:layout_marginLeft="@dimen/exoplayer_margin"
-        android:layout_marginRight="@dimen/exoplayer_margin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
