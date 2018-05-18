@@ -84,9 +84,9 @@ public class SingleStepFragment
         super.onActivityCreated(bundle);
         if (bundle != null) {
             bundle.getBoolean("auto_play", playWhenReady);
-            bundle.getInt("state", state);
+            bundle.getInt("state", state);0
             bundle.getLong("position", playerPosition);
-            Timber.d("RIP TATSUMI");
+            Timber.d("RIP TATSUMI, " + playWhenReady + ", " + state + ", " + playerPosition);
         }
     }
 
