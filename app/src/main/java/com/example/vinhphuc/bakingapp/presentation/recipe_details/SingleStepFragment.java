@@ -40,6 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import butterknife.BindBool;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class SingleStepFragment
         extends BaseFragment
@@ -74,19 +75,13 @@ public class SingleStepFragment
         bundle.putParcelable(STEP_KEY, step);
         SingleStepFragment fragment = new SingleStepFragment();
         fragment.setArguments(bundle);
-
-<<<<<<< HEAD:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_step/SingleStepFragment.java
         return fragment;
     }
 
-=======
->>>>>>> c54b69a... Fix video player not resuming video when changing device's state, playing from the beginning instead:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_details/SingleStepFragment.java
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-<<<<<<< HEAD:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_step/SingleStepFragment.java
-=======
         if (savedInstanceState != null) {
             playWhenReady = savedInstanceState.getBoolean("auto_play");
             state = savedInstanceState.getInt("state");
@@ -94,7 +89,6 @@ public class SingleStepFragment
             Timber.d("RIP MINE, playerPosition: " + playerPosition);
         }
 
->>>>>>> c54b69a... Fix video player not resuming video when changing device's state, playing from the beginning instead:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_details/SingleStepFragment.java
         Step step = getArguments().getParcelable(STEP_KEY);
         String description = step != null ? step.getDescription() : "";
         descTextView.setText(description);
@@ -192,12 +186,7 @@ public class SingleStepFragment
                     null
             );
 
-<<<<<<< HEAD:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_step/SingleStepFragment.java
-            if (playerPosition != C.TIME_UNSET)
-                exoPlayer.seekTo(playerPosition);
-=======
             exoPlayer.seekTo(playerPosition);
->>>>>>> c54b69a... Fix video player not resuming video when changing device's state, playing from the beginning instead:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_details/SingleStepFragment.java
             exoPlayer.prepare(mediaSource);
             exoPlayer.setPlayWhenReady(playWhenReady);
         }
@@ -262,10 +251,6 @@ public class SingleStepFragment
 
     private void releasePlayer() {
         if (exoPlayer != null) {
-<<<<<<< HEAD:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_step/SingleStepFragment.java
-            playerPosition = exoPlayer.getCurrentPosition();
-=======
->>>>>>> c54b69a... Fix video player not resuming video when changing device's state, playing from the beginning instead:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_details/SingleStepFragment.java
             exoPlayer.stop();
             exoPlayer.release();
             exoPlayer = null;
@@ -312,29 +297,19 @@ public class SingleStepFragment
         if (exoPlayer != null) {
             playWhenReady = exoPlayer.getPlayWhenReady();
             state = exoPlayer.getCurrentWindowIndex();
-<<<<<<< HEAD:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_step/SingleStepFragment.java
-            playerPosition = Math.max(0, exoPlayer.getCurrentPosition());
-=======
             playerPosition = exoPlayer.getCurrentPosition();
->>>>>>> c54b69a... Fix video player not resuming video when changing device's state, playing from the beginning instead:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_details/SingleStepFragment.java
         }
         bundle.putBoolean("auto_play", playWhenReady);
         bundle.putInt("state", state);
         bundle.putLong("position", playerPosition);
-<<<<<<< HEAD:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_step/SingleStepFragment.java
-=======
         Timber.d("RIP CHELSEA, playerPosition: " + playerPosition);
->>>>>>> c54b69a... Fix video player not resuming video when changing device's state, playing from the beginning instead:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_details/SingleStepFragment.java
     }
 
     public void setUri(Uri uri) {
         this.videoUri = uri;
     }
-<<<<<<< HEAD:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_step/SingleStepFragment.java
-=======
 
     public long getPlayerPosition() {
         return playerPosition;
     }
->>>>>>> c54b69a... Fix video player not resuming video when changing device's state, playing from the beginning instead:app/src/main/java/com/example/vinhphuc/bakingapp/presentation/recipe_details/SingleStepFragment.java
 }
