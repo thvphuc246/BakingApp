@@ -37,7 +37,8 @@
         </activity>
         <activity
             android:name=".presentation.recipe_step.RecipeStepActivity"
-            android:parentActivityName=".presentation.recipe_details.RecipeDetailsActivity">
+            android:parentActivityName=".presentation.recipe_details.RecipeDetailsActivity"
+            android:configChanges="orientation|keyboardHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.recipe_details.RecipeDetailsActivity" />

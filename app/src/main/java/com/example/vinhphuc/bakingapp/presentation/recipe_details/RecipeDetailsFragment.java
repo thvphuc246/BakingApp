@@ -18,7 +18,6 @@ import com.example.vinhphuc.bakingapp.presentation.base.BaseFragment;
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
 import com.example.vinhphuc.bakingapp.data.model.Step;
 import com.example.vinhphuc.bakingapp.presentation.recipe_step.RecipeStepActivity;
-import com.example.vinhphuc.bakingapp.presentation.recipe_step.SingleStepFragment;
 import com.example.vinhphuc.bakingapp.utils.ActivityUtils;
 import com.example.vinhphuc.bakingapp.utils.CommonUtils;
 
@@ -29,10 +28,12 @@ import butterknife.BindBool;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class RecipeDetailsFragment
         extends BaseFragment
         implements RecipeDetailsContract.View {
+
     @BindView(R.id.recipe_details_ingredients)
     TextView mIngredientTextView;
     @BindView(R.id.recipe_details_steps)
@@ -182,4 +183,5 @@ public class RecipeDetailsFragment
         super.onDestroyView();
         mPresenter.detachView();
     }
+
 }

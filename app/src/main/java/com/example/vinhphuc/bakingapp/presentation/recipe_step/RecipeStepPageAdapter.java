@@ -8,9 +8,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.vinhphuc.bakingapp.R;
 import com.example.vinhphuc.bakingapp.data.model.Step;
+import com.example.vinhphuc.bakingapp.presentation.recipe_details.SingleStepFragment;
 
 import java.util.List;
 import java.util.Locale;
+
+import timber.log.Timber;
 
 class RecipeStepPageAdapter extends FragmentPagerAdapter {
     private List<Step> steps;
@@ -29,7 +32,10 @@ class RecipeStepPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return SingleStepFragment.newInstance(steps.get(position));
+        SingleStepFragment fragment = SingleStepFragment.newInstance(steps.get(position));
+        Timber.d("RIP ICHIGO, position: " + position);
+        Timber.d("RIP CHELSEA, playerPosition: " + fragment.getPlayerPosition());
+        return fragment;
     }
 
     @Override

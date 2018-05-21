@@ -7,6 +7,8 @@ import com.example.vinhphuc.bakingapp.R;
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
 import com.example.vinhphuc.bakingapp.utils.ActivityUtils;
 
+import timber.log.Timber;
+
 public class RecipeDetailsActivity extends BaseActivity {
     public static final String RECIPE_KEY = "RECIPE_KEY";
 
@@ -21,17 +23,25 @@ public class RecipeDetailsActivity extends BaseActivity {
 
         RecipeDetailsContract.Presenter mPresenter = new RecipeDetailsPresenter(recipe);
 
-        RecipeDetailsFragment fragment =
+        RecipeDetailsFragment recipeDetailsFragment =
                 (RecipeDetailsFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.content_frame_recipe_details);
 
-        if (fragment == null) {
-            fragment = RecipeDetailsFragment.newInstance(bundle);
+        if (recipeDetailsFragment == null) {
+            recipeDetailsFragment = RecipeDetailsFragment.newInstance(bundle);
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(),
-                    fragment,
+                    recipeDetailsFragment,
                     R.id.content_frame_recipe_details);
-            fragment.setPresenter(mPresenter);
+            recipeDetailsFragment.setPresenter(mPresenter);
+        }
+
+        SingleStepFragment singleStepFragment =
+                (SingleStepFragment) getSupportFragmentManager()
+                        .findFragmentById(R.id.content_frame_recipe_details);
+
+        if (singleStepFragment == null) {
+
         }
     }
 

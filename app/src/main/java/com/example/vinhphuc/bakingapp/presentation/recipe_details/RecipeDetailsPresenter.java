@@ -1,6 +1,5 @@
 package com.example.vinhphuc.bakingapp.presentation.recipe_details;
 
-import com.example.vinhphuc.bakingapp.presentation.recipe_details.RecipeDetailsContract;
 import com.example.vinhphuc.bakingapp.data.model.Recipe;
 import com.example.vinhphuc.bakingapp.presentation.base.BasePresenter;
 
