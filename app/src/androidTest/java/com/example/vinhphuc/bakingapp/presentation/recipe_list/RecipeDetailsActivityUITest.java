@@ -1,4 +1,4 @@
-package com.example.vinhphuc.bakingapp.presentation.recipe_details;
+package com.example.vinhphuc.bakingapp.presentation.recipe_list;
 
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.filters.LargeTest;
@@ -6,7 +6,6 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.vinhphuc.bakingapp.R;
-import com.example.vinhphuc.bakingapp.presentation.recipe_list.RecipeListActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
